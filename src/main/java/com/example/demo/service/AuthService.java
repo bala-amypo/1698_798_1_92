@@ -12,16 +12,15 @@ public class AuthService {
     @Autowired
     private UserRepository userRepository;
 
-    public String register(User user) {
-        userRepository.save(user);
-        return "User Registered";
+    public User register(User user) {
+        return userRepository.save(user);
     }
 
-    public String login(String email, String password) {
+    public User login(String email, String password) {
         User user = userRepository.findByEmail(email);
         if (user != null && user.getPassword().equals(password)) {
-            return "Login Successful";
+            return user;
         }
-        return "Invalid Credentials";
+        return null;
     }
 }

@@ -15,9 +15,9 @@ public class JwtFilter {
 
         Server server = new Server();
         server.setUrl("https://9068.408procr.amypo.ai/");
-        server.setDescription("Server");
 
-        return new OpenAPI()
-                .setServers(List.of(server));
+        OpenAPI openAPI = new OpenAPI();
+        openAPI.setServers(List.of(server));
+        return openAPI;
     }
 }

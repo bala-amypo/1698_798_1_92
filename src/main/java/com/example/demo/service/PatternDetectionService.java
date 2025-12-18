@@ -14,7 +14,7 @@ public class PatternDetectionService {
     @Autowired
     private PatternDetectionResultRepository repository;
 
-    public PatternDetectionResult detect(Long zoneId) {
+    public PatternDetectionResult detectPattern(Long zoneId) {
         PatternDetectionResult result = new PatternDetectionResult();
         result.setZoneId(zoneId);
         result.setPattern("Sample Pattern");

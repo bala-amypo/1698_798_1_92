@@ -12,13 +12,13 @@ import com.example.demo.repository.CrimeReportRepository;
 public class CrimeReportService {
 
     @Autowired
-    private CrimeReportRepository crimeReportRepository;
+    private CrimeReportRepository repository;
 
-    public CrimeReport save(CrimeReport report) {
-        return crimeReportRepository.save(report);
+    public CrimeReport addReport(CrimeReport report) {
+        return repository.save(report);
     }
 
-    public List<CrimeReport> getAll() {
-        return crimeReportRepository.findAll();
+    public List<CrimeReport> getAllReports() {
+        return repository.findAll();
     }
 }

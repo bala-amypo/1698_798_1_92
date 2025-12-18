@@ -12,13 +12,13 @@ import com.example.demo.repository.HotspotZoneRepository;
 public class HotspotZoneService {
 
     @Autowired
-    private HotspotZoneRepository hotspotZoneRepository;
+    private HotspotZoneRepository repository;
 
-    public HotspotZone save(HotspotZone zone) {
-        return hotspotZoneRepository.save(zone);
+    public HotspotZone createZone(HotspotZone zone) {
+        return repository.save(zone);
     }
 
-    public List<HotspotZone> getAll() {
-        return hotspotZoneRepository.findAll();
+    public List<HotspotZone> getAllZones() {
+        return repository.findAll();
     }
 }

@@ -1,6 +1,5 @@
 package com.example.demo.service;
 
-import java.time.LocalDateTime;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,14 +12,14 @@ import com.example.demo.repository.AnalysisLogRepository;
 public class AnalysisLogService {
 
     @Autowired
-    private AnalysisLogRepository analysisLogRepository;
+    private AnalysisLogRepository repository;
 
-    public AnalysisLog saveLog(AnalysisLog log) {
-        log.setCreatedAt(LocalDateTime.now());
-        return analysisLogRepository.save(log);
+    public AnalysisLog addLog(Long zoneId, AnalysisLog log) {
+        log.setZoneId(zoneId);
+        return repository.save(log);
     }
 
-    public List<AnalysisLog> getAllLogs() {
-        return analysisLogRepository.findAll();
+    public List<AnalysisLog> getLogsByZone(Long zoneId) {
+        return repository.findByZoneId(zoneId);
     }
 }
