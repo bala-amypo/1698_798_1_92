@@ -1,25 +1,38 @@
 package com.example.demo.service;
 
-import java.util.List;
-
-import org.springframework.beans.factory.annotation.Autowired;
+import com.example.demo.model.AnalysisLog;
+import com.example.demo.model.HotspotZone;
+import com.example.demo.repository.AnalysisLogRepository;
+import com.example.demo.repository.HotspotZoneRepository;
 import org.springframework.stereotype.Service;
 
-import com.example.demo.model.AnalysisLog;
-import com.example.demo.repository.AnalysisLogRepository;
+import java.util.List;
 
 @Service
 public class AnalysisLogService {
 
-    @Autowired
-    private AnalysisLogRepository repository;
+    private final AnalysisLogRepository analysisLogRepository;
+    private final HotspotZoneRepository hotspotZoneRepository;
 
-    public AnalysisLog addLog(Long zoneId, AnalysisLog log) {
-        log.setZoneId(zoneId);
-        return repository.save(log);
+    public AnalysisLogService(AnalysisLogRepository analysisLogRepository,
+                              HotspotZoneRepository hotspotZoneRepository) {
+        this.analysisLogRepository = analysisLogRepository;
+        this.hotspotZoneRepository = hotspotZoneRepository;
+    }
+
+    public AnalysisLog createLog(Long zoneId, String message) {
+
+        HotspotZone zone = hotspotZoneRepository.findById(zoneId)
+                .orElseThrow(() -> new RuntimeException("HotspotZone not found"));
+
+        AnalysisLog log = new AnalysisLog();
+        log.setMessage(message);
+        log.setZone(zone);
+
+        return analysisLogRepository.save(log);
     }
 
     public List<AnalysisLog> getLogsByZone(Long zoneId) {
-        return repository.findByZoneId(zoneId);
+        return analysisLogRepository.findByZone_Id(zoneId);
     }
 }
