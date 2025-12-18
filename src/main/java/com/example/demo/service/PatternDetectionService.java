@@ -1,27 +1,38 @@
 package com.example.demo.service;
 
-import java.util.List;
-
-import org.springframework.beans.factory.annotation.Autowired;
+import com.example.demo.model.HotspotZone;
+import com.example.demo.model.PatternDetectionResult;
+import com.example.demo.repository.HotspotZoneRepository;
+import com.example.demo.repository.PatternDetectionResultRepository;
 import org.springframework.stereotype.Service;
 
-import com.example.demo.model.PatternDetectionResult;
-import com.example.demo.repository.PatternDetectionResultRepository;
+import java.util.List;
 
 @Service
 public class PatternDetectionService {
 
-    @Autowired
-    private PatternDetectionResultRepository repository;
+    private final PatternDetectionResultRepository repository;
+    private final HotspotZoneRepository hotspotZoneRepository;
 
-    public PatternDetectionResult detectPattern(Long zoneId) {
+    public PatternDetectionService(PatternDetectionResultRepository repository,
+                                   HotspotZoneRepository hotspotZoneRepository) {
+        this.repository = repository;
+        this.hotspotZoneRepository = hotspotZoneRepository;
+    }
+
+    public PatternDetectionResult saveResult(Long zoneId, String pattern) {
+
+        HotspotZone zone = hotspotZoneRepository.findById(zoneId)
+                .orElseThrow(() -> new RuntimeException("Zone not found"));
+
         PatternDetectionResult result = new PatternDetectionResult();
-        result.setZoneId(zoneId);
-        result.setPattern("Sample Pattern");
+        result.setZone(zone);
+        result.setPattern(pattern);
+
         return repository.save(result);
     }
 
     public List<PatternDetectionResult> getResultsByZone(Long zoneId) {
-        return repository.findByZoneId(zoneId);
+        return repository.findByZone_Id(zoneId);
     }
 }
