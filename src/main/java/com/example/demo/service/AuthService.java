@@ -7,19 +7,21 @@ import com.example.demo.model.User;
 import com.example.demo.repository.UserRepository;
 
 @Service
-public class AuthService implements com.example.demo.service.UserService {
+public class AuthService {
 
     @Autowired
     private UserRepository userRepository;
 
-    @Override
-    public User register(User user) {
-        return userRepository.save(user);
+    public String register(User user) {
+        userRepository.save(user);
+        return "User Registered";
     }
 
-    @Override
-    public User findByEmail(String email) {
-        return userRepository.findByEmail(email)
-                .orElseThrow(() -> new RuntimeException("User not found"));
+    public String login(String email, String password) {
+        User user = userRepository.findByEmail(email);
+        if (user != null && user.getPassword().equals(password)) {
+            return "Login Successful";
+        }
+        return "Invalid Credentials";
     }
 }

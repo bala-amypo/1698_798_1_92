@@ -10,21 +10,17 @@ import com.example.demo.model.AnalysisLog;
 import com.example.demo.repository.AnalysisLogRepository;
 
 @Service
-public class AnalysisLogService implements com.example.demo.service.AnalysisLogService {
+public class AnalysisLogService {
 
     @Autowired
     private AnalysisLogRepository analysisLogRepository;
 
-    @Override
-    public AnalysisLog addLog(Long zoneId, String message) {
-        AnalysisLog log = new AnalysisLog();
-        log.setMessage(message);
-        log.setLoggedAt(LocalDateTime.now());
+    public AnalysisLog saveLog(AnalysisLog log) {
+        log.setCreatedAt(LocalDateTime.now());
         return analysisLogRepository.save(log);
     }
 
-    @Override
-    public List<AnalysisLog> getLogsByZone(Long zoneId) {
+    public List<AnalysisLog> getAllLogs() {
         return analysisLogRepository.findAll();
     }
 }

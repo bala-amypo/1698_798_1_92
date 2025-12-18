@@ -9,21 +9,19 @@ import com.example.demo.model.PatternDetectionResult;
 import com.example.demo.repository.PatternDetectionResultRepository;
 
 @Service
-public class PatternDetectionService implements com.example.demo.service.PatternDetectionService {
+public class PatternDetectionService {
 
     @Autowired
-    private PatternDetectionResultRepository patternRepo;
+    private PatternDetectionResultRepository repository;
 
-    @Override
-    public PatternDetectionResult detectPattern(Long zoneId) {
+    public PatternDetectionResult detect(Long zoneId) {
         PatternDetectionResult result = new PatternDetectionResult();
-        result.setCrimeCount(0);
-        result.setDetectedPattern("No pattern detected");
-        return patternRepo.save(result);
+        result.setZoneId(zoneId);
+        result.setPattern("Sample Pattern");
+        return repository.save(result);
     }
 
-    @Override
     public List<PatternDetectionResult> getResultsByZone(Long zoneId) {
-        return patternRepo.findAll();
+        return repository.findByZoneId(zoneId);
     }
 }

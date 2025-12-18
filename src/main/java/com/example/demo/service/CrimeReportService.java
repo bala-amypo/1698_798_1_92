@@ -9,18 +9,16 @@ import com.example.demo.model.CrimeReport;
 import com.example.demo.repository.CrimeReportRepository;
 
 @Service
-public class CrimeReportService implements com.example.demo.service.CrimeReportService {
+public class CrimeReportService {
 
     @Autowired
     private CrimeReportRepository crimeReportRepository;
 
-    @Override
-    public CrimeReport addReport(CrimeReport report) {
+    public CrimeReport save(CrimeReport report) {
         return crimeReportRepository.save(report);
     }
 
-    @Override
-    public List<CrimeReport> getAllReports() {
+    public List<CrimeReport> getAll() {
         return crimeReportRepository.findAll();
     }
 }

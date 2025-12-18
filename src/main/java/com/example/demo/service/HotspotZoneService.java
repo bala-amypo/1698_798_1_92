@@ -9,18 +9,16 @@ import com.example.demo.model.HotspotZone;
 import com.example.demo.repository.HotspotZoneRepository;
 
 @Service
-public class HotspotZoneService implements com.example.demo.service.HotspotZoneService {
+public class HotspotZoneService {
 
     @Autowired
     private HotspotZoneRepository hotspotZoneRepository;
 
-    @Override
-    public HotspotZone addZone(HotspotZone zone) {
+    public HotspotZone save(HotspotZone zone) {
         return hotspotZoneRepository.save(zone);
     }
 
-    @Override
-    public List<HotspotZone> getAllZones() {
+    public List<HotspotZone> getAll() {
         return hotspotZoneRepository.findAll();
     }
 }
