@@ -37,7 +37,7 @@ public class CrimeReport {
     public CrimeReport() {
     }
 
-    // Getters & Setters
+  
     public Long getId() {
         return id;
     }
