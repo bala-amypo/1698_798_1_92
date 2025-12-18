@@ -2,7 +2,7 @@ package com.example.demo.service;
 
 import java.util.List;
 
-import com.example.demo.entity.HotspotZone;
+import com.example.demo.model.HotspotZone;
 
 public interface HotspotZoneService {
 
