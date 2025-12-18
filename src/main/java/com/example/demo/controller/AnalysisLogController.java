@@ -1,28 +1,30 @@
 package com.example.demo.controller;
 
-import java.util.List;
-
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.*;
-
 import com.example.demo.model.AnalysisLog;
 import com.example.demo.service.AnalysisLogService;
+import org.springframework.web.bind.annotation.*;
 
-@CrossOrigin(origins = "*")
+import java.util.List;
+
 @RestController
 @RequestMapping("/logs")
 public class AnalysisLogController {
 
-    @Autowired
-    private AnalysisLogService analysisLogService;
+    private final AnalysisLogService analysisLogService;
 
-    @PostMapping("/{zoneId}")
-    public AnalysisLog addLog(@PathVariable Long zoneId,
-                              @RequestBody AnalysisLog log) {
-        return analysisLogService.addLog(zoneId, log);
+    public AnalysisLogController(AnalysisLogService analysisLogService) {
+        this.analysisLogService = analysisLogService;
     }
 
-    @GetMapping("/zone/{zoneId}")
+    @PostMapping("/{zoneId}")
+    public AnalysisLog addLog(
+            @PathVariable Long zoneId,
+            @RequestBody AnalysisLog log) {
+
+        return analysisLogService.createLog(zoneId, log.getMessage());
+    }
+
+    @GetMapping("/{zoneId}")
     public List<AnalysisLog> getLogsByZone(@PathVariable Long zoneId) {
         return analysisLogService.getLogsByZone(zoneId);
     }
