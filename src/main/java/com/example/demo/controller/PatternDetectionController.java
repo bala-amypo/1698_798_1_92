@@ -17,7 +17,7 @@ public class PatternDetectionController {
     private PatternDetectionService patternService;
 
     @PostMapping("/detect/{zoneId}")
-    public PatternDetectionResult detectPattern(@PathVariable Long `zoneId) {
+    public PatternDetectionResult detectPattern(@PathVariable Long zoneId) {
         return patternService.detect(Long zoneId);
     }
 
