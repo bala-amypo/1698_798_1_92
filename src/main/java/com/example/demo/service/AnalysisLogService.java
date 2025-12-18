@@ -1,12 +1,17 @@
+@Service
+public class AnalysisLogService {
 
-package com.example.demo.service;
+    @Autowired
+    private AnalysisLogRepository repo;
 
-import java.util.List;
-import com.example.demo.model.AnalysisLog;
+    public AnalysisLog addLog(Long zoneId, String message) {
+        AnalysisLog log = new AnalysisLog();
+        log.setMessage(message);
+        log.setLoggedAt(LocalDateTime.now());
+        return repo.save(log);
+    }
 
-public interface AnalysisLogService {
-
-    AnalysisLog addLog(Long zoneId, AnalysisLog log);
-
-    List<AnalysisLog> getLogsByZone(Long zoneId);
+    public List<AnalysisLog> getLogsByZone(Long zoneId) {
+        return repo.findAll();
+    }
 }

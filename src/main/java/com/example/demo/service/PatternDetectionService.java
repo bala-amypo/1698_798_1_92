@@ -1,12 +1,17 @@
-package com.example.demo.service;
+@Service
+public class PatternDetectionService {
 
-import java.util.List;
+    @Autowired
+    private PatternDetectionResultRepository repo;
 
-import com.example.demo.model.PatternDetectionResult;
+    public PatternDetectionResult detectPattern(Long zoneId) {
+        PatternDetectionResult r = new PatternDetectionResult();
+        r.setCrimeCount(0);
+        r.setDetectedPattern("No Pattern");
+        return repo.save(r);
+    }
 
-public interface PatternDetectionService {
-
-    PatternDetectionResult detectPattern(Long zoneId);
-
-    List<PatternDetectionResult> getResultsByZone(Long zoneId);
+    public List<PatternDetectionResult> getResultsByZone(Long zoneId) {
+        return repo.findAll();
+    }
 }

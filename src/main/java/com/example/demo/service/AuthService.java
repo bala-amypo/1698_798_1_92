@@ -1,10 +1,23 @@
 package com.example.demo.service;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
 import com.example.demo.model.User;
+import com.example.demo.repository.UserRepository;
 
-public interface AuthService {
+@Service
+public class UserService {
 
-    User register(User user);
+    @Autowired
+    private UserRepository userRepository;
 
-    User login(String email, String password);
+    public User register(User user) {
+        return userRepository.save(user);
+    }
+
+    public User findByEmail(String email) {
+        return userRepository.findByEmail(email)
+                .orElseThrow(() -> new RuntimeException("User not found"));
+    }
 }
