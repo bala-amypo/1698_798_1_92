@@ -1,14 +1,10 @@
-@Service
-public class HotspotZoneService {
+package com.example.demo.repository;
 
-    @Autowired
-    private HotspotZoneRepository repo;
+import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.stereotype.Repository;
 
-    public HotspotZone addZone(HotspotZone zone) {
-        return repo.save(zone);
-    }
+import com.example.demo.model.HotspotZone;
 
-    public List<HotspotZone> getAllZones() {
-        return repo.findAll();
-    }
+@Repository
+public interface HotspotZoneRepository extends JpaRepository<HotspotZone, Long> {
 }

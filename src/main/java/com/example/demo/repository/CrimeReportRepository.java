@@ -1,14 +1,10 @@
-@Service
-public class CrimeReportService {
+package com.example.demo.repository;
 
-    @Autowired
-    private CrimeReportRepository repo;
+import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.stereotype.Repository;
 
-    public CrimeReport addReport(CrimeReport report) {
-        return repo.save(report);
-    }
+import com.example.demo.model.CrimeReport;
 
-    public List<CrimeReport> getAllReports() {
-        return repo.findAll();
-    }
+@Repository
+public interface CrimeReportRepository extends JpaRepository<CrimeReport, Long> {
 }
