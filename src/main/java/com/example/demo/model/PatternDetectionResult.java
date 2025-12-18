@@ -31,6 +31,8 @@ public class PatternDetectionResult {
     public PatternDetectionResult() {
     }
 
+    // ---------- Getters & Setters ----------
+
     public Long getId() {
         return id;
     }

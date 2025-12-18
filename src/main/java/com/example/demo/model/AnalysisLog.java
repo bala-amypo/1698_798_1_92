@@ -33,6 +33,8 @@ public class AnalysisLog {
     public AnalysisLog() {
     }
 
+    // ---------- Getters & Setters ----------
+
     public Long getId() {
         return id;
     }
