@@ -2,11 +2,14 @@ package com.example.demo.entity;
 
 import java.time.LocalDateTime;
 
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.PrePersist;
+import jakarta.validation.constraints.Email;
+import jakarta.validation.constraints.NotBlank;
 
 @Entity
 public class User {
@@ -15,17 +18,21 @@ public class User {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    @NotBlank
     private String name;
 
-    private String email;   // must be unique (handled in DB/service)
+    @Email
+    @NotBlank
+    @Column(unique = true, nullable = false)
+    private String email;
 
-    private String password; // stored as BCrypt hash
+    @NotBlank
+    private String password; 
 
-    private String role; // ADMIN / ANALYST
+    private String role; 
 
     private LocalDateTime createdAt;
 
-    // Automatically set createdAt and default role
     @PrePersist
     public void onCreate() {
         this.createdAt = LocalDateTime.now();
@@ -37,7 +44,7 @@ public class User {
     public User() {
     }
 
-    // Getters and Setters
+    
     public Long getId() {
         return id;
     }
@@ -80,9 +87,5 @@ public class User {
  
     public LocalDateTime getCreatedAt() {
         return createdAt;
-    }
- 
-    public void setCreatedAt(LocalDateTime createdAt) {
-        this.createdAt = createdAt;
     }
 }

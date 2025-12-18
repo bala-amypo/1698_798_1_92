@@ -4,6 +4,10 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.Column;
+import jakarta.validation.constraints.Max;
+import jakarta.validation.constraints.Min;
+import jakarta.validation.constraints.NotBlank;
 
 @Entity
 public class HotspotZone {
@@ -12,13 +16,21 @@ public class HotspotZone {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    @NotBlank
+    @Column(unique = true)
     private String zoneName;
 
+    @Min(-90)
+    @Max(90)
     private Double centerLat;
 
+    @Min(-180)
+    @Max(180)
     private Double centerLong;
 
-    private String severityLevel; // LOW / MEDIUM / HIGH
+   
+    @NotBlank
+    private String severityLevel;
 
     public HotspotZone() {
     }
