@@ -1,32 +1,33 @@
 package com.example.demo.controller;
 
-import java.util.List;
-
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
-
 import com.example.demo.model.PatternDetectionResult;
 import com.example.demo.service.PatternDetectionService;
+import org.springframework.web.bind.annotation.*;
 
-@CrossOrigin(origins = "*")
+import java.util.List;
+
 @RestController
 @RequestMapping("/patterns")
 public class PatternDetectionController {
 
-    @Autowired
-    private PatternDetectionService patternService;
+    private final PatternDetectionService patternService;
 
-    @PostMapping("/detect/{zoneId}")
-    public PatternDetectionResult detectPattern(@PathVariable Long zoneId) {
-        return patternService.detectPattern(zoneId);
+    public PatternDetectionController(PatternDetectionService patternService) {
+        this.patternService = patternService;
     }
 
-    @GetMapping("/zone/{zoneId}")
+    // Trigger pattern detection (dummy pattern for now)
+    @PostMapping("/{zoneId}")
+    public PatternDetectionResult detectPattern(@PathVariable Long zoneId) {
+
+        // You can later replace this with real detection logic
+        String detectedPattern = "SUSPICIOUS_ACTIVITY";
+
+        return patternService.saveResult(zoneId, detectedPattern);
+    }
+
+    // Fetch results for a zone
+    @GetMapping("/{zoneId}")
     public List<PatternDetectionResult> getResults(@PathVariable Long zoneId) {
         return patternService.getResultsByZone(zoneId);
     }
