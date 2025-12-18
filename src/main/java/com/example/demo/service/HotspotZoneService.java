@@ -1,12 +1,14 @@
-package com.example.demo.service;
+@Service
+public class HotspotZoneService {
 
-import java.util.List;
+    @Autowired
+    private HotspotZoneRepository repo;
 
-import com.example.demo.model.HotspotZone;
+    public HotspotZone addZone(HotspotZone zone) {
+        return repo.save(zone);
+    }
 
-public interface HotspotZoneService {
-
-    HotspotZone createZone(HotspotZone zone);
-
-    List<HotspotZone> getAllZones();
+    public List<HotspotZone> getAllZones() {
+        return repo.findAll();
+    }
 }

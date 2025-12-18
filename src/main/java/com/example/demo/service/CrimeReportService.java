@@ -1,12 +1,14 @@
-package com.example.demo.service;
+@Service
+public class CrimeReportService {
 
-import java.util.List;
+    @Autowired
+    private CrimeReportRepository repo;
 
-import com.example.demo.model.CrimeReport;
+    public CrimeReport addReport(CrimeReport report) {
+        return repo.save(report);
+    }
 
-public interface CrimeReportService {
-
-    CrimeReport addReport(CrimeReport report);
-
-    List<CrimeReport> getAllReports();
+    public List<CrimeReport> getAllReports() {
+        return repo.findAll();
+    }
 }
