@@ -13,7 +13,8 @@ public class JwtFilter {
     public OpenAPI customOpenAPI() {
         return new OpenAPI()
                 // You need to change the port as per your server
-                .servers(List.of(
+                servers = List.of(server);
+(
                         new Server().url("https://9068.408procr.amypo.ai/")
                 ));
         }
