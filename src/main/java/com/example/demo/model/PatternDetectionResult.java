@@ -1,10 +1,31 @@
-package com.example.demo.repository;
+package com.example.demo.model;
 
-import com.example.demo.model.PatternDetectionResult;
-import org.springframework.data.jpa.repository.JpaRepository;
-import java.util.List;
+import jakarta.persistence.*;
+import java.time.LocalDate;
 
-public interface PatternDetectionResultRepository
-        extends JpaRepository<PatternDetectionResult, Long> {
-    List<PatternDetectionResult> findByZone_Id(Long zoneId);
+@Entity
+@Table(name = "pattern_detection_results")
+public class PatternDetectionResult {
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
+
+    @ManyToOne
+    private HotspotZone zone;
+
+    private LocalDate analysisDate;
+    private Integer crimeCount;
+    private String detectedPattern;
+
+    public PatternDetectionResult() {}
+
+    public PatternDetectionResult(HotspotZone zone, Integer crimeCount, String detectedPattern) {
+        this.zone = zone;
+        this.crimeCount = Math.max(0, crimeCount);
+        this.detectedPattern = detectedPattern;
+        this.analysisDate = LocalDate.now();
+    }
+
+    // getters
 }

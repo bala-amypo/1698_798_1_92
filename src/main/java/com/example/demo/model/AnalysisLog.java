@@ -1,10 +1,31 @@
-package com.example.demo.repository;
+package com.example.demo.model;
 
-import com.example.demo.model.AnalysisLog;
-import org.springframework.data.jpa.repository.JpaRepository;
-import java.util.List;
+import jakarta.persistence.*;
+import java.time.LocalDateTime;
 
-public interface AnalysisLogRepository
-        extends JpaRepository<AnalysisLog, Long> {
-    List<AnalysisLog> findByZone_Id(Long zoneId);
+@Entity
+@Table(name = "analysis_logs")
+public class AnalysisLog {
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
+
+    private String message;
+    private LocalDateTime loggedAt;
+
+    @ManyToOne
+    private HotspotZone zone;
+
+    public AnalysisLog() {}
+
+    public AnalysisLog(String message, HotspotZone zone) {
+        this.message = message;
+        this.zone = zone;
+    }
+
+    @PrePersist
+    public void prePersist() {
+        this.loggedAt = LocalDateTime.now();
+    }
 }
