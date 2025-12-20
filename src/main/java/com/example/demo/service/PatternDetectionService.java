@@ -1,8 +1,4 @@
 
-
-
-
-
 package com.example.demo.service;
 
 import com.example.demo.model.HotspotZone;
@@ -40,4 +36,5 @@ return repository.save(result);
 
 public List<PatternDetectionResult> getResultsByZone(Long zoneId) {
 return repository.findByZone_Id(zoneId);
+}
 }
