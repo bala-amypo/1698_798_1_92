@@ -1,34 +1,69 @@
 
 
-package com.example.demo.controller;
+package com.example.demo.model;
 
-import com.example.demo.model.AnalysisLog;
-import com.example.demo.service.AnalysisLogService;
-import org.springframework.web.bind.annotation.*;
+import java.time.LocalDateTime;
 
-import java.util.List;
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import jakarta.persistence.ManyToOne;
+import jakarta.persistence.PrePersist;
+import jakarta.validation.constraints.NotBlank;
 
-@RestController
-@RequestMapping("/logs")
-public class AnalysisLogController {
+@Entity
+public class AnalysisLog {
 
-private final AnalysisLogService analysisLogService;
+@Id
+@GeneratedValue(strategy = GenerationType.IDENTITY)
+private Long id;
 
-public AnalysisLogController(AnalysisLogService analysisLogService) {
-this.analysisLogService = analysisLogService;
+@NotBlank
+private String message;
+
+private LocalDateTime loggedAt;
+
+@ManyToOne
+private HotspotZone zone;
+
+@PrePersist
+public void onCreate() {
+this.loggedAt = LocalDateTime.now();
 }
 
-@PostMapping("/{zoneId}")
-public AnalysisLog addLog(
-@PathVariable Long zoneId,
-@RequestBody AnalysisLog log) {
-
-return analysisLogService.createLog(zoneId, log.getMessage());
+public AnalysisLog() {
 }
 
-@GetMapping("/{zoneId}")
-public List<AnalysisLog> getLogsByZone(@PathVariable Long zoneId) {
-return analysisLogService.getLogsByZone(zoneId);
+// ---------- Getters & Setters ----------
+
+public Long getId() {
+return id;
+}
+
+public void setId(Long id) {
+this.id = id;
+}
+
+public String getMessage() {
+return message;
+}
+
+public void setMessage(String message) {
+this.message = message;
+}
+
+public LocalDateTime getLoggedAt() {
+return loggedAt;
+}
+
+public HotspotZone getZone() {
+return zone;
+}
+
+public void setZone(HotspotZone zone) {
+this.zone = zone;
 }
 }
+
 

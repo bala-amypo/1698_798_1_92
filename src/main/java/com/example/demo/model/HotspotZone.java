@@ -1,36 +1,82 @@
+
 package com.example.demo.model;
 
-import jakarta.persistence.*;
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import jakarta.persistence.Column;
+import jakarta.validation.constraints.Max;
+import jakarta.validation.constraints.Min;
+import jakarta.validation.constraints.NotBlank;
 
 @Entity
-@Table(name = "hotspot_zones")
 public class HotspotZone {
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+@Id
+@GeneratedValue(strategy = GenerationType.IDENTITY)
+private Long id;
 
-    @Column(unique = true)
-    private String zoneName;
+@NotBlank
+@Column(unique = true)
+private String zoneName;
 
-    private Double centerLat;
-    private Double centerLong;
-    private String severityLevel;
+@Min(-90)
+@Max(90)
+private Double centerLat;
 
-    public HotspotZone() {}
+@Min(-180)
+@Max(180)
+private Double centerLong;
 
-    public HotspotZone(String zoneName, Double centerLat, Double centerLong) {
-        this.zoneName = zoneName;
-        this.centerLat = centerLat;
-        this.centerLong = centerLong;
-        this.severityLevel = "LOW";
-    }
 
-    // getters/setters
-    public Long getId() { return id; }
-    public String getZoneName() { return zoneName; }
-    public Double getCenterLat() { return centerLat; }
-    public Double getCenterLong() { return centerLong; }
-    public String getSeverityLevel() { return severityLevel; }
-    public void setSeverityLevel(String severityLevel) { this.severityLevel = severityLevel; }
+@NotBlank
+private String severityLevel;
+
+public HotspotZone() {
 }
+
+public Long getId() {
+return id;
+}
+
+public void setId(Long id) {
+this.id = id;
+}
+
+public String getZoneName() {
+return zoneName;
+}
+
+public void setZoneName(String zoneName) {
+this.zoneName = zoneName;
+}
+
+public Double getCenterLat() {
+return centerLat;
+}
+
+public void setCenterLat(Double centerLat) {
+this.centerLat = centerLat;
+}
+
+public Double getCenterLong() {
+return centerLong;
+}
+
+public void setCenterLong(Double centerLong) {
+this.centerLong = centerLong;
+}
+
+public String getSeverityLevel() {
+return severityLevel;
+}
+
+public void setSeverityLevel(String severityLevel) {
+this.severityLevel = severityLevel;
+}
+}
+
+
+
+
