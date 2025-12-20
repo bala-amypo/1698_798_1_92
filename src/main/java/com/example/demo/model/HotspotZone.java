@@ -1,36 +1,11 @@
-package com.example.demo.model;
+package com.example.demo.repository;
 
-import jakarta.persistence.*;
+import com.example.demo.model.HotspotZone;
+import org.springframework.data.jpa.repository.JpaRepository;
+import java.util.*;
 
-@Entity
-@Table(name = "hotspot_zones")
-public class HotspotZone {
-
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
-
-    @Column(unique = true)
-    private String zoneName;
-
-    private Double centerLat;
-    private Double centerLong;
-    private String severityLevel;
-
-    public HotspotZone() {}
-
-    public HotspotZone(String zoneName, Double centerLat, Double centerLong) {
-        this.zoneName = zoneName;
-        this.centerLat = centerLat;
-        this.centerLong = centerLong;
-        this.severityLevel = "LOW";
-    }
-
-    // getters/setters
-    public Long getId() { return id; }
-    public String getZoneName() { return zoneName; }
-    public Double getCenterLat() { return centerLat; }
-    public Double getCenterLong() { return centerLong; }
-    public String getSeverityLevel() { return severityLevel; }
-    public void setSeverityLevel(String severityLevel) { this.severityLevel = severityLevel; }
+public interface HotspotZoneRepository extends JpaRepository<HotspotZone, Long> {
+    boolean existsByZoneName(String zoneName);
+    Optional<HotspotZone> findByZoneName(String zoneName);
+    List<HotspotZone> findBySeverityLevel(String level);
 }
