@@ -1,4 +1,3 @@
-
 package com.example.demo.service;
 
 import com.example.demo.model.HotspotZone;
@@ -12,29 +11,29 @@ import java.util.List;
 @Service
 public class PatternDetectionService {
 
-private final PatternDetectionResultRepository repository;
-private final HotspotZoneRepository hotspotZoneRepository;
+    private final PatternDetectionResultRepository repository;
+    private final HotspotZoneRepository hotspotZoneRepository;
 
-public PatternDetectionService(PatternDetectionResultRepository repository,
-HotspotZoneRepository hotspotZoneRepository) {
-this.repository = repository;
-this.hotspotZoneRepository = hotspotZoneRepository;
-}
+    public PatternDetectionService(
+            PatternDetectionResultRepository repository,
+            HotspotZoneRepository hotspotZoneRepository) {
+        this.repository = repository;
+        this.hotspotZoneRepository = hotspotZoneRepository;
+    }
 
-public PatternDetectionResult saveResult(Long zoneId, String pattern) {
+    public PatternDetectionResult saveResult(Long zoneId, String pattern) {
 
-HotspotZone zone = hotspotZoneRepository.findById(zoneId)
-.orElseThrow(() -> new RuntimeException("Zone not found"));
+        HotspotZone zone = hotspotZoneRepository.findById(zoneId)
+                .orElseThrow(() -> new RuntimeException("Zone not found"));
 
-PatternDetectionResult result = new PatternDetectionResult();
-result.setZone(zone);
-result.setPattern(pattern);
+        PatternDetectionResult result = new PatternDetectionResult();
+        result.setZone(zone);
+        result.setPattern(pattern);
 
-return repository.save(result);
-}
-}
+        return repository.save(result);
+    }
 
-public List<PatternDetectionResult> getResultsByZone(Long zoneId) {
-return repository.findByZone_Id(zoneId);
-}
+    public List<PatternDetectionResult> getResultsByZone(Long zoneId) {
+        return repository.findByZone_Id(zoneId);
+    }
 }
