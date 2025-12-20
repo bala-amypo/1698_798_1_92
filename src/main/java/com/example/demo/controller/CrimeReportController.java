@@ -1,27 +1,32 @@
+
 package com.example.demo.controller;
+
+import java.util.List;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.*;
 
 import com.example.demo.model.CrimeReport;
 import com.example.demo.service.CrimeReportService;
-import org.springframework.web.bind.annotation.*;
-import java.util.List;
 
+@CrossOrigin(origins = "*")
 @RestController
 @RequestMapping("/reports")
 public class CrimeReportController {
 
-    private final CrimeReportService service;
+@Autowired
+private CrimeReportService crimeReportService;
 
-    public CrimeReportController(CrimeReportService service) {
-        this.service = service;
-    }
-
-    @PostMapping
-    public CrimeReport add(@RequestBody CrimeReport report) {
-        return service.addReport(report);
-    }
-
-    @GetMapping
-    public List<CrimeReport> all() {
-        return service.getAllReports();
-    }
+@PostMapping("/")
+public CrimeReport addReport(@RequestBody CrimeReport report) {
+return crimeReportService.addReport(report);
 }
+
+@GetMapping("/")
+public List<CrimeReport> getAllReports() {
+return crimeReportService.getAllReports();
+}
+}
+
+
+
