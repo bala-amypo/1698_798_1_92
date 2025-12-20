@@ -11,7 +11,8 @@ import java.util.Optional;
 @Repository
 public interface HotspotZoneRepository extends JpaRepository<HotspotZone, Long> {
 
-    List<HotspotZone> findBySeverityLevel(String level);
+List<HotspotZone> findBySeverityLevel(String level);
 
-    Optional<HotspotZone> findByZoneName(String zoneName);
+Optional<HotspotZone> findByZoneName(String zoneName);
 }
+

@@ -1,11 +1,13 @@
-        package com.example.demo.repository;
 
-        import com.example.demo.model.AnalysisLog;
-        import org.springframework.data.jpa.repository.JpaRepository;
-        import java.util.List;
 
-        public interface AnalysisLogRepository extends JpaRepository<AnalysisLog, Long> {
+package com.example.demo.repository;
 
-            // Navigate the relationship using _Id
-            List<AnalysisLog> findByZone_Id(Long zoneId);
-        }
+import com.example.demo.model.AnalysisLog;
+import org.springframework.data.jpa.repository.JpaRepository;
+import java.util.List;
+
+public interface AnalysisLogRepository extends JpaRepository<AnalysisLog, Long> {
+
+// Navigate the relationship using _Id
+List<AnalysisLog> findByZone_Id(Long zoneId);
+}
