@@ -1,31 +1,34 @@
-package com.example.demo.model;
 
-import jakarta.persistence.*;
-import java.time.LocalDateTime;
 
-@Entity
-@Table(name = "analysis_logs")
-public class AnalysisLog {
+package com.example.demo.controller;
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+import com.example.demo.model.AnalysisLog;
+import com.example.demo.service.AnalysisLogService;
+import org.springframework.web.bind.annotation.*;
 
-    private String message;
-    private LocalDateTime loggedAt;
+import java.util.List;
 
-    @ManyToOne
-    private HotspotZone zone;
+@RestController
+@RequestMapping("/logs")
+public class AnalysisLogController {
 
-    public AnalysisLog() {}
+private final AnalysisLogService analysisLogService;
 
-    public AnalysisLog(String message, HotspotZone zone) {
-        this.message = message;
-        this.zone = zone;
-    }
-
-    @PrePersist
-    public void prePersist() {
-        this.loggedAt = LocalDateTime.now();
-    }
+public AnalysisLogController(AnalysisLogService analysisLogService) {
+this.analysisLogService = analysisLogService;
 }
+
+@PostMapping("/{zoneId}")
+public AnalysisLog addLog(
+@PathVariable Long zoneId,
+@RequestBody AnalysisLog log) {
+
+return analysisLogService.createLog(zoneId, log.getMessage());
+}
+
+@GetMapping("/{zoneId}")
+public List<AnalysisLog> getLogsByZone(@PathVariable Long zoneId) {
+return analysisLogService.getLogsByZone(zoneId);
+}
+}
+
