@@ -1,37 +1,24 @@
-
 package com.example.demo.model;
 
 import jakarta.persistence.*;
+import java.time.LocalDate;
 
 @Entity
+@Table(name = "pattern_detection_results")
 public class PatternDetectionResult {
 
-@Id
-@GeneratedValue(strategy = GenerationType.IDENTITY)
-private Long id;
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
 
-@ManyToOne
-private HotspotZone zone;
+    @ManyToOne
+    private HotspotZone zone;
 
-private String pattern;
+    private LocalDate analysisDate;
+    private Integer crimeCount;
+    private String detectedPattern;
 
-public Long getId() {
-return id;
-}
+    public PatternDetectionResult() {}
 
-public HotspotZone getZone() {
-return zone;
-}
-
-public void setZone(HotspotZone zone) {
-this.zone = zone;
-}
-
-public String getPattern() {
-return pattern;
-}
-
-public void setPattern(String pattern) {
-this.pattern = pattern;
-}
+    // getters and setters
 }
