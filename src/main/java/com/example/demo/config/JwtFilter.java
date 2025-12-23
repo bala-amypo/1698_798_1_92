@@ -14,7 +14,7 @@ public class JwtFilter {
     public OpenAPI customOpenAPI() {
 
         Server server = new Server();
-        server.setUrl("https://9177.408procr.amypo.ai/");
+        server.setUrl("https://9223.pro604cr.amypo.ai/");
 
         OpenAPI openAPI = new OpenAPI();
         openAPI.setServers(List.of(server));
