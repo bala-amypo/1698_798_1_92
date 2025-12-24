@@ -4,14 +4,12 @@ import java.time.LocalDateTime;
 
 public class DateValidator {
 
-    public static void validateNotFuture(LocalDateTime dateTime) {
+    public static boolean isPastOrPresent(LocalDateTime dateTime) {
 
         if (dateTime == null) {
-            throw new IllegalArgumentException("date cannot be null");
+            return false;
         }
 
-        if (dateTime.isAfter(LocalDateTime.now())) {
-            throw new IllegalArgumentException("date cannot be in the future");
-        }
+        return !dateTime.isAfter(LocalDateTime.now());
     }
 }
