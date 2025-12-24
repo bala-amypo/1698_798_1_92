@@ -5,6 +5,7 @@ import com.example.demo.model.HotspotZone;
 import com.example.demo.repository.AnalysisLogRepository;
 import com.example.demo.repository.HotspotZoneRepository;
 import com.example.demo.service.AnalysisLogService;
+
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -17,15 +18,19 @@ public class AnalysisLogServiceImpl implements AnalysisLogService {
 
     public AnalysisLogServiceImpl(
             AnalysisLogRepository logRepository,
-            HotspotZoneRepository zoneRepository) {
+            HotspotZoneRepository zoneRepository
+    ) {
         this.logRepository = logRepository;
         this.zoneRepository = zoneRepository;
     }
 
     @Override
-    public AnalysisLog addLog(Long zoneId, String message) {
-        HotspotZone zone = zoneRepository.findById(zoneId).orElseThrow();
-        return logRepository.save(new AnalysisLog(message, zone));
+    public AnalysisLog createLog(Long zoneId, String message) {
+        HotspotZone zone = zoneRepository.findById(zoneId)
+                .orElseThrow(() -> new RuntimeException("Zone not found"));
+
+        AnalysisLog log = new AnalysisLog(message, zone);
+        return logRepository.save(log);
     }
 
     @Override
