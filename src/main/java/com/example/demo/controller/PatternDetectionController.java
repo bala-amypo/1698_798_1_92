@@ -2,29 +2,32 @@ package com.example.demo.controller;
 
 import com.example.demo.model.PatternDetectionResult;
 import com.example.demo.service.PatternDetectionService;
-import org.springframework.beans.factory.annotation.Autowired;
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
 @RestController
 @RequestMapping("/patterns")
-@CrossOrigin
+@Tag(name = "Pattern Detection")
 public class PatternDetectionController {
 
-    @Autowired
-    private PatternDetectionService patternService;
+    private final PatternDetectionService service;
 
-    @PostMapping("/{zoneId}")
-    public PatternDetectionResult saveResult(
-            @PathVariable Long zoneId,
-            @RequestParam String pattern) {
-        return patternService.saveResult(zoneId, pattern);
+    public PatternDetectionController(PatternDetectionService service) {
+        this.service = service;
     }
 
-    @GetMapping("/{zoneId}")
-    public List<PatternDetectionResult> getResultsByZone(
-            @PathVariable Long zoneId) {
-        return patternService.getResultsByZone(zoneId);
+    @PostMapping("/detect/{zoneId}")
+    @Operation(summary = "Detect crime pattern")
+    public PatternDetectionResult detect(@PathVariable Long zoneId) {
+        return service.detectPattern(zoneId);
+    }
+
+    @GetMapping("/zone/{zoneId}")
+    @Operation(summary = "Get pattern results for zone")
+    public List<PatternDetectionResult> results(@PathVariable Long zoneId) {
+        return service.getResultsByZone(zoneId);
     }
 }

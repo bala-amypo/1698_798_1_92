@@ -2,26 +2,32 @@ package com.example.demo.controller;
 
 import com.example.demo.model.HotspotZone;
 import com.example.demo.service.HotspotZoneService;
-import org.springframework.beans.factory.annotation.Autowired;
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
 @RestController
 @RequestMapping("/zones")
-@CrossOrigin
+@Tag(name = "Hotspot Zones")
 public class HotspotZoneController {
 
-    @Autowired
-    private HotspotZoneService hotspotZoneService;
+    private final HotspotZoneService service;
+
+    public HotspotZoneController(HotspotZoneService service) {
+        this.service = service;
+    }
 
     @PostMapping
-    public HotspotZone createZone(@RequestBody HotspotZone zone) {
-        return hotspotZoneService.createZone(zone);
+    @Operation(summary = "Create hotspot zone")
+    public HotspotZone add(@RequestBody HotspotZone zone) {
+        return service.addZone(zone);
     }
 
     @GetMapping
-    public List<HotspotZone> getAllZones() {
-        return hotspotZoneService.getAllZones();
+    @Operation(summary = "List hotspot zones")
+    public List<HotspotZone> getAll() {
+        return service.getAllZones();
     }
 }
