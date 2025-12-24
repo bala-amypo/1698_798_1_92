@@ -5,7 +5,7 @@ import com.example.demo.repository.CrimeReportRepository;
 import com.example.demo.service.CrimeReportService;
 
 import java.util.List;
-
+@Service
 public class CrimeReportServiceImpl implements CrimeReportService {
 
     private final CrimeReportRepository repo;

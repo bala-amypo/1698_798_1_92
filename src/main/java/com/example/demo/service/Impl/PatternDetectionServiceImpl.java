@@ -7,7 +7,7 @@ import com.example.demo.repository.HotspotZoneRepository;
 import com.example.demo.service.PatternDetectionService;
 
 import java.util.List;
-
+@Service
 public class PatternDetectionServiceImpl implements PatternDetectionService {
 
     private final PatternDetectionResultRepository resultRepo;

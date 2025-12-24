@@ -3,7 +3,7 @@ package com.example.demo.service.impl;
 import com.example.demo.model.User;
 import com.example.demo.repository.UserRepository;
 import com.example.demo.service.AuthService;
-
+@Service
 public class AuthServiceImpl implements AuthService {
 
     private final UserRepository userRepository;

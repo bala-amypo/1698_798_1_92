@@ -5,7 +5,7 @@ import com.example.demo.repository.HotspotZoneRepository;
 import com.example.demo.service.HotspotZoneService;
 
 import java.util.List;
-
+@Service
 public class HotspotZoneServiceImpl implements HotspotZoneService {
 
     private final HotspotZoneRepository repo;
