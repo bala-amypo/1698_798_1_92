@@ -3,6 +3,7 @@ package com.example.demo.service.impl;
 import com.example.demo.model.HotspotZone;
 import com.example.demo.repository.HotspotZoneRepository;
 import com.example.demo.service.HotspotZoneService;
+import org.springframework.stereotype.Service;
 
 import java.util.List;
 @Service

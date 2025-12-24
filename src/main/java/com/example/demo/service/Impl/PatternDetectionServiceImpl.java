@@ -5,6 +5,7 @@ import com.example.demo.model.HotspotZone;
 import com.example.demo.repository.PatternDetectionResultRepository;
 import com.example.demo.repository.HotspotZoneRepository;
 import com.example.demo.service.PatternDetectionService;
+import org.springframework.stereotype.Service;
 
 import java.util.List;
 @Service
