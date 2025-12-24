@@ -4,7 +4,6 @@ import jakarta.persistence.*;
 import java.time.LocalDateTime;
 
 @Entity
-@Table(name = "analysis_logs")
 public class AnalysisLog {
 
     @Id
@@ -12,19 +11,17 @@ public class AnalysisLog {
     private Long id;
 
     private String message;
-
-    private LocalDateTime loggedAt;
+    private LocalDateTime loggedAt = LocalDateTime.now();
 
     @ManyToOne
-    @JoinColumn(name = "zone_id")
     private HotspotZone zone;
 
-    public AnalysisLog() {
-    }
+    public AnalysisLog() {}
 
     public AnalysisLog(String message, HotspotZone zone) {
         this.message = message;
         this.zone = zone;
+        this.loggedAt = LocalDateTime.now();
     }
 
     @PrePersist
@@ -32,31 +29,9 @@ public class AnalysisLog {
         this.loggedAt = LocalDateTime.now();
     }
 
-    /* ========= GETTERS ========= */
-
-    public Long getId() {
-        return id;
-    }
-
-    public String getMessage() {
-        return message;
-    }
-
-    public LocalDateTime getLoggedAt() {
-        return loggedAt;
-    }
-
-    public HotspotZone getZone() {
-        return zone;
-    }
-
-    /* ========= SETTERS ========= */
-
-    public void setMessage(String message) {
-        this.message = message;
-    }
-
-    public void setZone(HotspotZone zone) {
-        this.zone = zone;
-    }
+    public String getMessage() { return message; }
+    public void setMessage(String message) { this.message = message; }
+    public LocalDateTime getLoggedAt() { return loggedAt; }
+    public HotspotZone getZone() { return zone; }
+    public void setZone(HotspotZone zone) { this.zone = zone; }
 }
