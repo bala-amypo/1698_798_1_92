@@ -12,7 +12,6 @@ public class PatternDetectionResult {
     private Long id;
 
     @ManyToOne
-    @JoinColumn(name = "zone_id")
     private HotspotZone zone;
 
     private LocalDate analysisDate;
@@ -24,7 +23,7 @@ public class PatternDetectionResult {
     public PatternDetectionResult() {
     }
 
-    /* ========= GETTERS ========= */
+    // -------- GETTERS --------
 
     public Long getId() {
         return id;
@@ -46,7 +45,7 @@ public class PatternDetectionResult {
         return detectedPattern;
     }
 
-    /* ========= SETTERS ========= */
+    // -------- SETTERS --------
 
     public void setZone(HotspotZone zone) {
         this.zone = zone;
@@ -60,11 +59,7 @@ public class PatternDetectionResult {
         this.crimeCount = crimeCount;
     }
 
-    /**
-     * IMPORTANT:
-     * This method name is REQUIRED because your service calls setPattern(...)
-     */
-    public void setPattern(String pattern) {
-        this.detectedPattern = pattern;
+    public void setDetectedPattern(String detectedPattern) {
+        this.detectedPattern = detectedPattern;
     }
 }
