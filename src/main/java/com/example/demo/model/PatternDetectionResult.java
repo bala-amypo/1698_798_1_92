@@ -15,51 +15,47 @@ public class PatternDetectionResult {
     private HotspotZone zone;
 
     private LocalDate analysisDate;
-
     private Integer crimeCount;
-
     private String detectedPattern;
-
-    public PatternDetectionResult() {
-    }
-
-    // -------- GETTERS --------
 
     public Long getId() {
         return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
     }
 
     public HotspotZone getZone() {
         return zone;
     }
 
-    public LocalDate getAnalysisDate() {
-        return analysisDate;
-    }
-
-    public Integer getCrimeCount() {
-        return crimeCount;
-    }
-
-    public String getDetectedPattern() {
-        return detectedPattern;
-    }
-
-    // -------- SETTERS --------
-
     public void setZone(HotspotZone zone) {
         this.zone = zone;
+    }
+
+    public LocalDate getAnalysisDate() {
+        return analysisDate;
     }
 
     public void setAnalysisDate(LocalDate analysisDate) {
         this.analysisDate = analysisDate;
     }
 
+    public Integer getCrimeCount() {
+        return crimeCount;
+    }
+
     public void setCrimeCount(Integer crimeCount) {
         this.crimeCount = crimeCount;
+    }
+
+    public String getDetectedPattern() {
+        return detectedPattern;
     }
 
     public void setDetectedPattern(String detectedPattern) {
         this.detectedPattern = detectedPattern;
     }
 }
+
