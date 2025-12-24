@@ -1,27 +1,26 @@
-package com.example.demo.service.Impl;
+package com.example.demo.service.impl;
 
 import com.example.demo.model.CrimeReport;
 import com.example.demo.repository.CrimeReportRepository;
 import com.example.demo.service.CrimeReportService;
+
 import java.util.List;
 
 public class CrimeReportServiceImpl implements CrimeReportService {
 
-    private final CrimeReportRepository repository;
+    private final CrimeReportRepository repo;
 
-    public CrimeReportServiceImpl(CrimeReportRepository repository) {
-        this.repository = repository;
+    public CrimeReportServiceImpl(CrimeReportRepository repo) {
+        this.repo = repo;
     }
 
     @Override
     public CrimeReport addReport(CrimeReport report) {
-        return repository.save(report);
+        return repo.save(report);
     }
 
     @Override
-    public List<CrimeReport> getReportsInRange(
-            double minLat, double maxLat,
-            double minLong, double maxLong) {
-        return repository.findByLatLongRange(minLat, maxLat, minLong, maxLong);
+    public List<CrimeReport> getAllReports() {
+        return repo.findAll();
     }
 }

@@ -1,10 +1,12 @@
-package com.example.demo.service.Impl;
+package com.example.demo.service.impl;
 
 import com.example.demo.model.AnalysisLog;
 import com.example.demo.model.HotspotZone;
 import com.example.demo.repository.AnalysisLogRepository;
 import com.example.demo.repository.HotspotZoneRepository;
 import com.example.demo.service.AnalysisLogService;
+
+import java.util.List;
 
 public class AnalysisLogServiceImpl implements AnalysisLogService {
 
@@ -19,11 +21,16 @@ public class AnalysisLogServiceImpl implements AnalysisLogService {
     }
 
     @Override
-    public void addLog(Long zoneId, String message) {
+    public void createLog(Long zoneId, String message) {
         HotspotZone zone = zoneRepo.findById(zoneId).orElse(null);
         AnalysisLog log = new AnalysisLog();
         log.setMessage(message);
         log.setZone(zone);
         logRepo.save(log);
+    }
+
+    @Override
+    public List<AnalysisLog> getLogsByZone(Long zoneId) {
+        return logRepo.findByZone_Id(zoneId);
     }
 }

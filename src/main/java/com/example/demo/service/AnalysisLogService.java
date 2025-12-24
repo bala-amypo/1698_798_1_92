@@ -1,5 +1,11 @@
 package com.example.demo.service;
 
+import com.example.demo.model.AnalysisLog;
+import java.util.List;
+
 public interface AnalysisLogService {
-    void addLog(Long zoneId, String message);
+
+    void createLog(Long zoneId, String message);
+
+    List<AnalysisLog> getLogsByZone(Long zoneId);
 }
