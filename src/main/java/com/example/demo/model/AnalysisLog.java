@@ -12,12 +12,15 @@ public class AnalysisLog {
     private Long id;
 
     private String message;
+
     private LocalDateTime loggedAt;
 
     @ManyToOne
+    @JoinColumn(name = "zone_id")
     private HotspotZone zone;
 
-    public AnalysisLog() {}
+    public AnalysisLog() {
+    }
 
     public AnalysisLog(String message, HotspotZone zone) {
         this.message = message;
@@ -29,5 +32,31 @@ public class AnalysisLog {
         this.loggedAt = LocalDateTime.now();
     }
 
-    // getters and setters
+    /* ========= GETTERS ========= */
+
+    public Long getId() {
+        return id;
+    }
+
+    public String getMessage() {
+        return message;
+    }
+
+    public LocalDateTime getLoggedAt() {
+        return loggedAt;
+    }
+
+    public HotspotZone getZone() {
+        return zone;
+    }
+
+    /* ========= SETTERS ========= */
+
+    public void setMessage(String message) {
+        this.message = message;
+    }
+
+    public void setZone(HotspotZone zone) {
+        this.zone = zone;
+    }
 }
