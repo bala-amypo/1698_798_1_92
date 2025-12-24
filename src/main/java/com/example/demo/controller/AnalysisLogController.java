@@ -2,28 +2,26 @@ package com.example.demo.controller;
 
 import com.example.demo.model.AnalysisLog;
 import com.example.demo.service.AnalysisLogService;
-import org.springframework.beans.factory.annotation.Autowired;
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
 @RestController
-@RequestMapping("/analysis-logs")
-@CrossOrigin
+@RequestMapping("/logs")
+@Tag(name = "Analysis Logs")
 public class AnalysisLogController {
 
-    @Autowired
-    private AnalysisLogService analysisLogService;
+    private final AnalysisLogService service;
 
-    @PostMapping("/{zoneId}")
-    public AnalysisLog createLog(
-            @PathVariable Long zoneId,
-            @RequestParam String message) {
-        return analysisLogService.createLog(zoneId, message);
+    public AnalysisLogController(AnalysisLogService service) {
+        this.service = service;
     }
 
-    @GetMapping("/{zoneId}")
-    public List<AnalysisLog> getLogsByZone(@PathVariable Long zoneId) {
-        return analysisLogService.getLogsByZone(zoneId);
+    @GetMapping("/zone/{zoneId}")
+    @Operation(summary = "Get logs for zone")
+    public List<AnalysisLog> getLogs(@PathVariable Long zoneId) {
+        return service.getLogsByZone(zoneId);
     }
 }
