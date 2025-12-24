@@ -3,21 +3,16 @@ package com.example.demo.service;
 import com.example.demo.config.JwtUtil;
 import com.example.demo.model.User;
 import com.example.demo.repository.UserRepository;
-import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 @Service
 public class AuthService {
 
     private final UserRepository userRepository;
-    private final PasswordEncoder passwordEncoder;
     private final JwtUtil jwtUtil;
 
-    public AuthService(UserRepository userRepository,
-                       PasswordEncoder passwordEncoder,
-                       JwtUtil jwtUtil) {
+    public AuthService(UserRepository userRepository, JwtUtil jwtUtil) {
         this.userRepository = userRepository;
-        this.passwordEncoder = passwordEncoder;
         this.jwtUtil = jwtUtil;
     }
 
@@ -27,7 +22,7 @@ public class AuthService {
             throw new IllegalArgumentException("Email already exists");
         }
 
-        user.setPassword(passwordEncoder.encode(user.getPassword()));
+        // ❌ NO password encoding
         return userRepository.save(user);
     }
 
@@ -37,7 +32,8 @@ public class AuthService {
                 .orElseThrow(() ->
                         new IllegalArgumentException("Invalid email or password"));
 
-        if (!passwordEncoder.matches(password, user.getPassword())) {
+        // ❌ Plain-text password check
+        if (!user.getPassword().equals(password)) {
             throw new IllegalArgumentException("Invalid email or password");
         }
 
