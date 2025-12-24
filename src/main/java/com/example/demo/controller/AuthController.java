@@ -1,15 +1,13 @@
 package com.example.demo.controller;
 
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.*;
-
 import com.example.demo.model.User;
 import com.example.demo.service.AuthService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.*;
 
-@CrossOrigin(origins = "*")
 @RestController
 @RequestMapping("/auth")
+@CrossOrigin
 public class AuthController {
 
     @Autowired
@@ -21,13 +19,7 @@ public class AuthController {
     }
 
     @PostMapping("/login")
-    public ResponseEntity<String> login(@RequestBody User user) {
-
-        String token = authService.login(
-                user.getEmail(),
-                user.getPassword()
-        );
-
-        return ResponseEntity.ok(token);
+    public User login(@RequestBody User user) {
+        return authService.login(user.getEmail(), user.getPassword());
     }
 }

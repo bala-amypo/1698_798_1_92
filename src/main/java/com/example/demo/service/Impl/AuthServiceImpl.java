@@ -1,4 +1,4 @@
-package com.example.demo.service.Impl;
+package com.example.demo.service.impl;
 
 import com.example.demo.model.User;
 import com.example.demo.repository.UserRepository;
@@ -8,7 +8,6 @@ public class AuthServiceImpl implements AuthService {
 
     private final UserRepository userRepository;
 
-    // ✅ CORRECT CONSTRUCTOR (NO return type, name matches class)
     public AuthServiceImpl(UserRepository userRepository) {
         this.userRepository = userRepository;
     }

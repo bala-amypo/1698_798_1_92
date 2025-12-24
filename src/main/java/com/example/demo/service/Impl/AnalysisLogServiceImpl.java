@@ -1,4 +1,4 @@
-package com.example.demo.service.Impl;
+package com.example.demo.service.impl;
 
 import com.example.demo.model.AnalysisLog;
 import com.example.demo.model.HotspotZone;
@@ -21,12 +21,12 @@ public class AnalysisLogServiceImpl implements AnalysisLogService {
     }
 
     @Override
-    public void createLog(Long zoneId, String message) {
+    public AnalysisLog createLog(Long zoneId, String message) {
         HotspotZone zone = zoneRepo.findById(zoneId).orElse(null);
         AnalysisLog log = new AnalysisLog();
         log.setMessage(message);
         log.setZone(zone);
-        logRepo.save(log);
+        return logRepo.save(log);
     }
 
     @Override

@@ -1,30 +1,26 @@
-package com.example.demo.service.Impl;
+package com.example.demo.service.impl;
 
 import com.example.demo.model.HotspotZone;
 import com.example.demo.repository.HotspotZoneRepository;
 import com.example.demo.service.HotspotZoneService;
+
 import java.util.List;
 
 public class HotspotZoneServiceImpl implements HotspotZoneService {
 
-    private final HotspotZoneRepository repository;
+    private final HotspotZoneRepository repo;
 
-    public HotspotZoneServiceImpl(HotspotZoneRepository repository) {
-        this.repository = repository;
+    public HotspotZoneServiceImpl(HotspotZoneRepository repo) {
+        this.repo = repo;
     }
 
     @Override
-    public boolean existsByZoneName(String name) {
-        return repository.findByZoneName(name).isPresent();
+    public HotspotZone createZone(HotspotZone zone) {
+        return repo.save(zone);
     }
 
     @Override
-    public HotspotZone addZone(HotspotZone zone) {
-        return repository.save(zone);
-    }
-
-    @Override
-    public List<HotspotZone> getZonesBySeverity(String level) {
-        return repository.findBySeverityLevel(level);
+    public List<HotspotZone> getAllZones() {
+        return repo.findAll();
     }
 }
