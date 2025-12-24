@@ -6,22 +6,32 @@ import com.example.demo.service.HotspotZoneService;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+
 @Service
 public class HotspotZoneServiceImpl implements HotspotZoneService {
 
-    private final HotspotZoneRepository repo;
+    private final HotspotZoneRepository zoneRepository;
 
-    public HotspotZoneServiceImpl(HotspotZoneRepository repo) {
-        this.repo = repo;
+    public HotspotZoneServiceImpl(HotspotZoneRepository zoneRepository) {
+        this.zoneRepository = zoneRepository;
     }
 
     @Override
-    public HotspotZone createZone(HotspotZone zone) {
-        return repo.save(zone);
+    public HotspotZone addZone(HotspotZone zone) {
+        if (zoneRepository.existsByZoneName(zone.getZoneName())) {
+            throw new IllegalArgumentException("exists");
+        }
+        if (zone.getCenterLat() < -90 || zone.getCenterLat() > 90) {
+            throw new IllegalArgumentException("latitude");
+        }
+        if (zone.getCenterLong() < -180 || zone.getCenterLong() > 180) {
+            throw new IllegalArgumentException("longitude");
+        }
+        return zoneRepository.save(zone);
     }
 
     @Override
     public List<HotspotZone> getAllZones() {
-        return repo.findAll();
+        return zoneRepository.findAll();
     }
 }
