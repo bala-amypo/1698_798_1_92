@@ -6,7 +6,7 @@ import com.example.demo.service.UserService;
 import org.springframework.stereotype.Service;
 
 @Service
-public class UserServiceImpl implements UserService {
+public class AuthServiceImpl implements UserService {
 
     private final UserRepository userRepository;
 
