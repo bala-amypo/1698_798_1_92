@@ -14,18 +14,20 @@ public class SecurityConfig {
         http
             .csrf(csrf -> csrf.disable())
             .authorizeHttpRequests(auth -> auth
+                // Swagger & OpenAPI endpoints
                 .requestMatchers(
                     "/swagger-ui/**",
                     "/swagger-ui.html",
-                    "/v3/api-docs/**",
-                    "/**"
+                    "/v3/api-docs/**"
                 ).permitAll()
+
+                // Auth endpoints (login/register)
+                .requestMatchers("/auth/**").permitAll()
+
+                // Everything else (future secured APIs)
+                .anyRequest().authenticated()
             );
 
         return http.build();
     }
 }
-
-
-
-
